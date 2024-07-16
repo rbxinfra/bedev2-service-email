@@ -5,11 +5,11 @@
 	</ItemGroup>
 
 	<ItemGroup Label="PrivatePackages">
-		<PackageReference Include="Roblox.Email" Version="1.0.0" />
+		<PackageReference Include="Roblox.Email" Version="1.0.1" />
 		<PackageReference Include="Roblox.Configuration" Version="1.0.1" />
-		<PackageReference Include="Roblox.Processor.Core" Version="1.0.0" />
-		<PackageReference Include="Roblox.Platform.Email" Version="1.0.0" />
-		<PackageReference Include="Roblox.Platform.Email.Delivery" Version="1.0.0" />
+		<PackageReference Include="Roblox.Processor.Core" Version="1.0.1" />
+		<PackageReference Include="Roblox.Platform.Email" Version="1.0.1" />
+		<PackageReference Include="Roblox.Platform.Email.Delivery" Version="1.0.1" />
 	</ItemGroup>
 
 	<PropertyGroup>
