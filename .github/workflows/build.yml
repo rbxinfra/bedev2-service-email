@@ -221,7 +221,8 @@ jobs:
                 return;
               }
 
-              let dotnetCommand = `dotnet publish ${componentConfig.build.project_file} -c ${{ env.BUILD_CONFIGURATION }} -o ${componentConfig.build.component_directory}`;
+              let restoreCommand = `dotnet restore -f --no-cache --ignore-failed-sources ${componentConfig.build.project_file}`;
+              let dotnetCommand = `dotnet publish ${componentConfig.build.project_file} -c ${{ env.BUILD_CONFIGURATION }} -o ${componentConfig.build.component_directory} --no-restore`;
 
               if (componentConfig.build.additional_args) {
                 for (const arg of componentConfig.build.additional_args) {
@@ -230,6 +231,7 @@ jobs:
               }
 
               try {
+                child_process.execSync(restoreCommand, { stdio: 'inherit' });
                 child_process.execSync(dotnetCommand, { stdio: 'inherit' });
               } catch (error) {
                 core.setFailed(`Failed to build component ${component}`);
