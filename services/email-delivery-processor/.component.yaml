@@ -1,4 +1,5 @@
 component: email-delivery-processor
+
 # This is only used by the build worklow,
 # it determines how the component is built
 # Docker only relevant when the argument
