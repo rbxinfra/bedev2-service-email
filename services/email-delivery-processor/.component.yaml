@@ -1,0 +1,46 @@
+component: email-delivery-processor
+# This is only used by the build worklow,
+# it determines how the component is built
+# Docker only relevant when the argument
+# 
+build:
+  project_file: Roblox.EmailDelivery.Processor.csproj
+  component_directory: ./.deploy
+
+  additional_args:
+    - -p:IMAGE_TAG=${{ env.NOMAD_VERSION }}
+    - -p:CI=true
+
+  docker:
+    docker_file: Dockerfile
+    image_name: docker.artifactory.rbx.com/coordination/email-delivery-processor
+    
+deployment:
+  count: 1
+
+  job: email-delivery-processor-${{ env.NOMAD_SHORT_ENVIRONMENT }}
+
+  vault_policies:
+    - vault_secret_settings_providers_token_reader
+
+  # Passed to the meta section in Nomad
+  meta:
+    ENVIRONMENT: ${{ env.NOMAD_ENVIRONMENT }}
+
+  containers: # Maps to the groups section in Nomad
+    - image: docker.artifactory.rbx.com/coordination/email-delivery-processor
+      resources:
+        cpu: ${{ env.NOMAD_CPU }}
+        ram: ${{ env.NOMAD_RAM }}
+      services:
+        - name: email-delivery-processor-${{ env.NOMAD_SHORT_ENVIRONMENT }}
+          tags:
+            - ${{ env.NOMAD_ENVIRONMENT }}
+      config_maps:
+        - destination: secrets/file.env
+          env: true
+          on_change: restart
+          data: |
+            DEFAULT_LOG_LEVEL=Information
+            VAULT_ADDR="http://vault.service.consul:8200"
+            VAULT_TOKEN="{{ with secret "secret/teams/applications/vault-providers" }}{{ .Data.vault_token }}{{ end }}"

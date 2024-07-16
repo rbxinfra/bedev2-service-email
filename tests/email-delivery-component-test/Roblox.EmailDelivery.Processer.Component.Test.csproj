@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup Label="PrivatePackages">
+    <PackageReference Include="Roblox.Common" Version="1.0.0" />
+    <PackageReference Include="Roblox.EventLog" Version="1.0.0" />
+    <PackageReference Include="Roblox.Instrumentation" Version="1.0.0" />
+    <PackageReference Include="Roblox.Platform.Email.Delivery" Version="1.0.0" />
+
+    <Using Include="Roblox.Common" />
+    <Using Include="Roblox.EventLog" />
+    <Using Include="Roblox.Instrumentation" />
+
+    <Using Include="Roblox.Platform.Email" />
+    <Using Include="Roblox.Platform.Email.Delivery" />
+  </ItemGroup>
+
+</Project>
