@@ -366,5 +366,4 @@ deploy/
 .idea/
 .AssemblyAttributes
 .env
-
-ssl/.private
+launchSettings.json
