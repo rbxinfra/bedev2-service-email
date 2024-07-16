@@ -5,7 +5,7 @@ component: email-delivery-processor
 # Docker only relevant when the argument
 # 
 build:
-  project_file: Roblox.EmailDelivery.Processor.csproj
+  project_file: src/Roblox.EmailDelivery.Processor.csproj
   component_directory: ./.deploy
 
   additional_args:
